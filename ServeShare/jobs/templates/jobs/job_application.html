@@ -1,0 +1,30 @@
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">Job Application</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="container">
+                <form action="{% url 'users:login' %}" method="post" >
+                    {% csrf_token %}
+                    <div class="mb-3 input-box">
+                        <span class="icon"><ion-icon name="mail-outline"></ion-icon></span>
+                        {% comment %} <label for="exampleInputEmail1" class="form-label">Email ID</label> {% endcomment %}
+                        <input type="email" class="form-control" id="exampleInputEmail1" name="username" aria-describedby="emailHelp">
+                        <label for="email">Email ID</label>
+                    </div>
+                    <div class="mb-3 input-box">
+                        <span class="icon"><ion-icon name="call"></ion-icon>
+                        </span>
+                        {% comment %} <label for="exampleInputPassword1" class="form-label">Phone Number</label> {% endcomment %}
+                        <input type="number" class="form-control" name= "password" id="exampleInputPassword1">
+                        <label for="password">Phone Number</label>
+                    </div>
+                        <a class="btn btn-primary" type="submit" style="width: 100%;" name="apply" value="{{ job.id }}">Submit</a>
+                </form>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>

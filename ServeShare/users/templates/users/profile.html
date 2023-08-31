@@ -1,0 +1,376 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+        <link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
+        <link rel="stylesheet" href="{% static 'css/base.css' %}">
+        <link rel="stylesheet" href="{% static 'css/index.css' %}">
+        <link rel="stylesheet" href="{% static 'css/cfc.css' %}">
+        <link rel="stylesheet" href="{% static 'css/events.css' %}">
+        <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+        <link rel="stylesheet" href="{% static 'css/post1.css' %}">
+        <title>ServeShare</title>
+</head>
+
+<body style="overflow: auto">
+    <!-- NavBar -->
+    {% include 'navbar.html' %}
+    <div class="d-flex position-relative flex-column">
+        <div class="events d-flex p-4 ms-5 justify-content-center align-items-center post-1" style="height: 90vh;">
+    
+            <div class="scrolling ms-5 p-0" style="height: 100%; width: 93vw">
+
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="card border mb-4">
+                            <div class="card-body text-center">
+                                <img src="{{user.volunteer.profile_picture.url}}" alt="avatar" class="rounded-circle img-fluid"
+                                    style="width: 150px;">
+                                <h5 class="my-3">{{user.username}}</h5>
+                                <p class="text-muted mb-1">Date joined:{{user.volunteer.joining_date}}</p>
+                                <p class="text-muted mb-4">{{following}} Following/ {{followers}} Followers</p>
+                            </div>
+                        </div>
+
+
+
+                        <div class="card border mb-4 mb-lg-0">
+                            <div class="card-body text-center">
+                                <p class="mb-4">{{user.volunteer.bio}}</p>
+                            </div>
+                        </div>
+                        <div class="card border mb-4  align-items-center">
+                            <div class="card-body text-center">
+                                <h5>Badges earned</h5>
+                                <div class="container-fluid d-flex flex-column scrolling pt-3" style="height: 40vh;">
+                                    {% for badge in user.volunteer.badges.all %}
+                                    <div class="card border-primary mb-3" style="width: 10rem;">
+                                        <div class="card-body">
+                                            <img src="{{badge.image.url}}" class="card-img-top" alt="...">
+                                            <h5 class="card-title">{{badge.name}}</h5>
+                                            
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="col-lg-5">
+                            <div class="card mb-4 mb-lg-4">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-sm-4 mb-sm-0">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <p class="card-title">LeaderBoard Rank</p>
+                                                    <h3 class="card-text">{{user.volunteer.rank}}</h3>
+                                                    <a href="#" class="btn btn-primary btn-sm">Scoreboard</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <h6 class="card-title">Carbon Footprint</h6>
+                                                    <p class="card-text">[val]</p>
+                                                    <a href="#" class="btn btn-primary btn-sm">Calculate</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <h6 class="card-title">Eco-points</h6>
+                                                    <p class="card-text">{{user.volunteer.eco_points}}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            <div class="col-lg-5">
+                                <div class="card mb-4 mb-lg-4">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="card-header">
+                                                <h5>Achievements</h5>
+                                            </div>
+                                            <div class="card py-2" style="width: 120rem; overflow-y:auto; height: 35vh">
+                                                <div class="card border mb-4 mb-lg-0">
+                                                    {% for b in badges  %}
+                                                    <div class="card-body text-center">
+                                                        <div class="row">
+                                                            <div class="col-3">
+                                                                <img src="{{b.image.url}}" alt="" class="rounded rounded-circle" style="width: 80px; height: 80px;">
+                                                            </div>
+                                                            <div class="col-9 text-start">
+                                                                <div class="row">
+                                                                    <div class="col-9"> 
+                                                                        <h3>{{ b.name }}</h3>
+                                                                    </div>
+                                                                    <div class="col-3">
+                                                                        <div class="text-end">{{ b.events_participated }} / {{ b.total_events }}</div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="progress p-0" role="progressbar" aria-label="Progress" aria-valuenow="{{ b.events_participated }}" aria-valuemin="0" aria-valuemax="{{ b.total_events }}">
+                                                                        <div class="progress-bar bg-success" style="width: {{ b.progress_percentage }}%; color:black;">
+                                                                            
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>   
+                                                    </div>
+                                                    {% endfor %} 
+                                                </div>
+                                                
+                                                
+                                                
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-5">
+                                <div class="bg-light" style=" width: 47.5vw; height:35vh;">
+
+                                    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                                        <li class="nav-item" role="presentation">
+                                          <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Posts</button>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                          <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-jobs" type="button" role="tab" aria-controls="pills-jobs" aria-selected="false">Jobs</button>
+                                        </li>
+                                    </ul>
+    
+    
+                                    <div class="tab-content" id="pills-tabContent">
+    
+                                        <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">
+                                        
+                                            <div class="row row-cols-3 g-3 p-2">
+                                                {% for post in user.posts.all %}
+                                                <img src="{{post.image.url}}" alt="">
+                                                {% endfor %}
+                                            </div>
+
+                                        </div>
+
+                                        <div class="tab-pane fade" id="pills-jobs" role="tabpanel" aria-labelledby="pills-jobs-tab" tabindex="0">
+                                            
+                                            <div class="row row-cols-2 g-3 p-2">
+                                                {% for job in jobs %}
+                                                    <div class="accordion" id="accordionItem{{ job.id }}">
+                                                        <div class="accordion-item">
+                                                            <h2 class="accordion-header" id="heading{{ job.id }}">
+                                                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ job.id }}" aria-expanded="true" aria-controls="collapse{{ job.id }}">
+                                                                    {{ job.title }}
+                                                                </button>
+                                                            </h2>
+                                                            <div id="collapse{{ job.id }}" class="accordion-collapse collapse" aria-labelledby="heading{{ job.id }}" data-bs-parent="#accordionItem{{ job.id }}">
+                                                                <div class="accordion-body">
+                                                                    <div class="row">
+                                                                        {{ job.description }}
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <b>Venue: {{ job.venue }} </b>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <b>Stipend: Rs.{{ job.compensation }} </b>
+                                                                    </div>
+                                                                    <div class="row">
+
+                                                                        <a type="button" class="btn btn-primary m-0" data-bs-toggle="modal" data-bs-target="#exampleModal{{job.id}}">
+                                                                            Applicants
+                                                                        </a>
+                                                                        
+                                                                        <div class="modal fade" id="exampleModal{{job.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                            <div class="modal-dialog">
+                                                                              <div class="modal-content">
+                                                                                <div class="modal-header">Applicants</h1>
+                                                                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                                </div>
+                                                                                <div class="modal-body">
+                                                                                    <div class="container-fluid">
+                                                                                        <table class="table table-info table-striped">
+                                                                                            <thead class="table-dark">
+                                                                                                <tr>
+                                                                                                    <th><b>Applicant</b></th>
+                                                                                                    <th><b>Phone No.</b></th>
+                                                                                                    <th><b>Email Id</b></th>
+                                                                                                    <th><b>Approval</b></th>
+                                                                                                </tr>
+                                                                                            </thead>
+                                                                                            <tbody>
+                                                                                                {% for a in job.applicants.all %}
+                                                                                                    <tr>
+                                                                                                        <td><b><a class="text-decoration-none" style="color:black" href="{% url 'users:profile_view' user_id=a.user.id %}">{{ a.user }}</a></b></td>
+                                                                                                        <td><b><a class="text-decoration-none" style="color:black" href="{% url 'users:profile_view' user_id=a.user.id %}">{{ a.phno }}</a></b></td>
+                                                                                                        <td><b><a class="text-decoration-none" style="color:black" href="{% url 'users:profile_view' user_id=a.user.id %}">{{ a.email }}</a></b></td>
+                                                                                                        <td>
+                                                                                                            {% if a.user.volunteer in job.approved.all %}
+                                                                                                                <form method="POST" action="{% url 'jobs:disapprove_applicant' job.id a.user.id %}">
+                                                                                                                    {% csrf_token %}
+                                                                                                                    <button type="submit" class="btn btn-secondary">Disapprove</button>
+                                                                                                                </form>
+                                                                                                            {% else %}
+                                                                                                                <form method="POST" action="{% url 'jobs:approve_applicant' job.id a.user.id %}">
+                                                                                                                    {% csrf_token %}
+                                                                                                                    <button type="submit" class="btn btn-success">Approve</button>
+                                                                                                                </form>
+                                                                                                            {% endif %}
+                                                                                                        </td>
+                                                                                                    </tr>
+                                                                                                {% endfor %}
+                                                                                            </tbody>
+                                                                                        </table>
+                                                                                        
+                                                                                    </div>
+                                                                                </div>
+                                                                              </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                {% endfor %}
+                                            </div>
+    
+                                        </div>
+    
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                        
+                        
+                    </div>
+
+                </div>
+
+            </div>
+
+            
+
+            
+
+        <div class="sidebar position-absolute z-2" id="sidebar">
+            {% include 'sidebar.html' %}
+        </div>        
+    </div>
+
+
+    <div class="border-top border-bottom ps-5" style="background-color: rgba(0, 0, 0, 0.03);">
+       <div class="d-flex flex-column">
+         <!-- Section: Links  -->
+         <section class="pt-2">
+            <div class="px-3 text-start">
+                <!-- Grid row -->
+                <div class="row mt-3">
+                    <!-- Grid column -->
+                    <div class="col-md-3 col-lg-4 col-xl-3">
+                        <!-- Content -->
+                        <h6 class="text-uppercase fw-bold">
+                            <i class="fas fa-gem me-3"></i>ServeShare
+                        </h6>
+                        <p>
+                            Welcome to ServeShare, where purpose meets action. Join our vibrant
+                            community bridging volunteers and NGOs for impactful collaborations.
+                            Empower change, share your skills, and make a difference together
+                        </p>
+                    </div>
+                    <!-- Grid column -->
+
+                    <!-- Grid column -->
+                    <div class="col-md-2 col-lg-2 col-xl-2 mx-auto">
+                        <!-- Links -->
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            Upcoming Events
+
+                        </h6>
+                    </div>
+
+
+                    <!-- Grid column -->
+                    <div class="col-md-3 col-lg-2 col-xl-2 mx-auto">
+                        <!-- Links -->
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            Quick links
+                        </h6>
+                        <p>
+                            <a href="#!" class="text-reset">Home</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-reset">LeaderBoard</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-reset">Blogs</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-reset">Community</a>
+                        </p>
+                    </div>
+                    <!-- Grid column -->
+
+                    <!-- Grid column -->
+                    <div class="col-md-4 col-lg-2 col-xl-2">
+                        <!-- Links -->
+                        <h6 class="text-uppercase fw-bold mb-4">Join us</h6>
+                        <p>
+                            <a href="" class="me-4 text-reset">
+                                Donate
+                            </a>
+                        </p>
+
+                        <!-- Grid column -->
+                    </div>
+                    <!-- Grid row -->
+                </div>
+        </section>
+        <!-- Section: Links  -->
+
+        <!-- Copyright -->
+        <div class="text-center py-2">
+            © 2023 Copyright
+        </div>
+        <!-- Copyright -->
+       </div>
+    </div>
+   
+    
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script src="{% static 'js/sidebar.js' %}"></script>
+    <script src="{% static 'js/cfc.js' %}"></script>
+    <script src="{% static 'js/index.js' %}"></script>
+</body>
+
+</html>

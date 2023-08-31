@@ -1,0 +1,133 @@
+.container {
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    padding-right: 15px;
+    padding-left: 15px;
+   
+    
+  }
+  
+  .container-fluid {
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    padding-right: 15px;
+    padding-left: 15px;
+    display: flex;
+   
+  }
+  .row {
+    display: flex;
+    margin-right: -15px;
+    margin-left: -15px;
+    flex-wrap: wrap;
+  }
+  .col {
+    max-width: 100%;
+    flex-basis: 0;
+    flex-grow: 1;
+  }
+  .col-lg-8{
+    position: inherit;
+    flex: 0 50% 65%;
+    
+  }
+  .col-1{
+    margin-left: 1154px;
+  }
+  .col-11{
+    position: absolute;
+    width: 97%;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+  .col-lg-4 {
+    position: relative;
+    max-width: 33.33333%;
+    flex: 0 0 33.33333%;
+  }
+  .col-4,
+  .col-8,
+  .col,
+  .col-md-10,
+  .col-md-12,
+  .col-lg-3,
+  .col-lg-4,
+  .col-lg-6,
+  .col-lg-7,
+  .col-xl-4,
+  .col-xl-6,
+  .col-xl-8 {
+    position: relative;
+    width: 100%;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+  .card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    border: 1px solid rgba(27, 25, 65, 0.05);
+    border-radius: .375rem;
+    background-color: #fff;
+    background-clip: border-box;
+  }
+  .card-body {
+    padding: 1.5rem;
+    flex: 1 1 auto;
+    align-items:center;
+  }
+  .mb-4,
+  .my-4 {
+    margin-bottom: 1.5rem !important;
+  }
+  .avatar {
+    font-size: 1rem;
+    display: inline-flex;
+    width: 48px;
+    height: 48px;
+    color: #fff;
+    border-radius: 50%;
+    background-color: #eceef0;
+    align-items: center;
+    justify-content: center;
+  }
+  .text-muted {
+    color: #4b5969 !important;
+  }
+  .mb-lg-4{
+    
+    width: 730px;
+  }
+  .d-flex {
+    display: flex !important;
+  }
+  .card-header {
+    margin-bottom: 0;
+    padding: auto;
+    align-items: center;
+  }
+  .card-footer{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  
+    
+    background-color: #00BBFF;
+    background-clip: border-box;
+    width: 97.5%;
+  }
+  .card-body-footer{
+    width: 100%;
+    padding: 5;
+  }
+  .footer{
+    background-color: #d3f3fe;
+
+  }

@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container-fluid">
+    
+    {% if user.is_authenticated %}
+    <div class="container d-flex">
+        
+        {% if user.is_organization %}
+        <div class="container border">
+            <h1>ADD Event</h1>
+            <form method = POST enctype="multipart/form-data">
+                {% csrf_token %}
+                {{event_form.as_p}}
+                <button type="submit" class="btn btn-primary" name="add_event">Submit</button>
+            </form>
+        </div>
+    </div>
+    {% endif %}
+    
+    {% endif %}  
+</div>
+    {% endblock content %}

@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block content %}
+<section id="mainleader">
+    <main class="table">
+        <section class="table__header">
+            <button id="vol">Volunteer</button>
+        </section>
+        <section class="table__body">
+            <table>
+                <thead>
+                    <tr>
+                        <th> Rank </th>
+                        <th> Username </th>
+                        <th> Eco-Points </th>
+                        {% comment %} <th> Status </th> {% endcomment %}
+
+                    </tr>
+                </thead>
+                <tbody class="rows">
+                    
+                    {% for single in rank_list  %}
+                    
+                    <tr>
+
+                        <td> {{single.rank}} </td>
+                        <td> <img src="{{single.profile_picture.url}}" alt="">{{single.user.username}}</td>
+                        <td> {{single.eco_points}} </td>
+                        {% comment %} <td> +4</td> {% endcomment %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+</section>
+{% endblock content %}

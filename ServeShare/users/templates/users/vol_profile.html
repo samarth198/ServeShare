@@ -1,0 +1,244 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+        <link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
+        <link rel="stylesheet" href="{% static 'css/base.css' %}">
+        <link rel="stylesheet" href="{% static 'css/index.css' %}">
+        <link rel="stylesheet" href="{% static 'css/cfc.css' %}">
+        <link rel="stylesheet" href="{% static 'css/events.css' %}">
+        <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+        <link rel="stylesheet" href="{% static 'css/post1.css' %}">
+        <title>ServeShare</title>
+</head>
+
+<body style="overflow: auto">
+    <!-- NavBar -->
+    {% include 'navbar.html' %}
+    <div class="d-flex position-relative flex-column">
+        <div class="events d-flex p-4 ms-5 justify-content-center align-items-center post-1" style="height: 90vh;">
+    
+            <div class="scrolling ms-5 p-0" style="height: 100%; width: 93vw">
+
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="card border mb-4">
+                            <div class="card-body text-center">
+                                <img src="{{u.volunteer.profile_picture.url}}" alt="avatar" class="rounded-circle img-fluid"
+                                    style="width: 150px;">
+                                <h5 class="my-3">{{u.username}}</h5>
+                                <p class="text-muted mb-1">Date joined:{{u.volunteer.joining_date}}</p>
+                                <p class="text-muted mb-4">{{following}} Following/ {{followers}} Followers</p>
+                                <div class="d-flex justify-content-center mb-2">
+                                    {% if user.is_volunteer %}
+                                    <form action="" method="post">
+                                        {% csrf_token %}
+                                        {% if u in user.volunteer.following.all %}
+                                        <button class="btn btn-secondary" name="unfollow" value="{{u.id}}">Following</button>
+                                        {% else %}
+                                        <button class="btn btn-primary" name="follow" value="{{u.id}}">Follow</button>
+                                        {% endif %}
+                                    </form>
+                                    {% endif %}
+                                    <!-- <button type="button" class="btn btn-outline-primary ms-1">Message</button> -->
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="card border mb-4 mb-lg-0">
+                            <div class="card-body text-center">
+                                <p class="mb-4">{{u.volunteer.bio}}</p>
+                            </div>
+                        </div>
+                        <div class="card border mb-4  align-items-center">
+                            
+
+
+
+                        </div>
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="col-lg-5">
+                            <div class="card mb-4 mb-lg-4">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-sm-4 mb-sm-0">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <p class="card-title">LeaderBoard Rank</p>
+                                                    <h3 class="card-text">{{u.volunteer.rank}}</h3>
+                                                    <a href="#" class="btn btn-primary btn-sm">Scoreboard</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <h6 class="card-title">Carbon Footprint</h6>
+                                                    <p class="card-text">[val]</p>
+                                                    <a href="#" class="btn btn-primary btn-sm">Calculate</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <h6 class="card-title">Eco-points</h6>
+                                                    <p class="card-text">{{u.volunteer.eco_points}}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            
+                            <div class="col-lg-5">
+                                <div class="card mb-4 mb-lg-4">
+                                    <div class="card-body">
+                                        <h5 class="card-title"> Posts</h5>
+                                        {% comment %} <div class="row"> {% endcomment %}
+                                            <div class="card-group">
+                                                <div class="row row-cols-3 g-3 p-3">
+                                                    {% for post in u.posts.all %}
+                                                    <div class="card mb-4">
+                                                        <img src="{{post.image.url}}" class="card-img-top">
+                                                        <div class="card-body">
+                                                            <h5 class="card-title"></h5>
+                                                        </div>
+                                                    </div>
+                                                    {% endfor %}
+                                                </div>
+                                                
+                                            </div>
+                                        {% comment %} </div> {% endcomment %}
+
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                        
+                        
+                    </div>
+
+                </div>
+
+            </div>
+
+            
+
+            
+
+        <div class="sidebar position-absolute z-2" id="sidebar">
+            {% include 'sidebar.html' %}
+        </div>        
+    </div>
+
+
+    <div class="border-top border-bottom ps-5" style="background-color: rgba(0, 0, 0, 0.03);">
+       <div class="d-flex flex-column">
+         <!-- Section: Links  -->
+         <section class="pt-2">
+            <div class="px-3 text-start">
+                <!-- Grid row -->
+                <div class="row mt-3">
+                    <!-- Grid column -->
+                    <div class="col-md-3 col-lg-4 col-xl-3">
+                        <!-- Content -->
+                        <h6 class="text-uppercase fw-bold">
+                            <i class="fas fa-gem me-3"></i>ServeShare
+                        </h6>
+                        <p>
+                            Welcome to ServeShare, where purpose meets action. Join our vibrant
+                            community bridging volunteers and NGOs for impactful collaborations.
+                            Empower change, share your skills, and make a difference together
+                        </p>
+                    </div>
+                    <!-- Grid column -->
+
+                    <!-- Grid column -->
+                    <div class="col-md-2 col-lg-2 col-xl-2 mx-auto">
+                        <!-- Links -->
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            Upcoming Events
+
+                        </h6>
+                    </div>
+
+
+                    <!-- Grid column -->
+                    <div class="col-md-3 col-lg-2 col-xl-2 mx-auto">
+                        <!-- Links -->
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            Quick links
+                        </h6>
+                        <p>
+                            <a href="#!" class="text-reset">Home</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-reset">LeaderBoard</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-reset">Blogs</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-reset">Community</a>
+                        </p>
+                    </div>
+                    <!-- Grid column -->
+
+                    <!-- Grid column -->
+                    <div class="col-md-4 col-lg-2 col-xl-2">
+                        <!-- Links -->
+                        <h6 class="text-uppercase fw-bold mb-4">Join us</h6>
+                        <p>
+                            <a href="" class="me-4 text-reset">
+                                Donate
+                            </a>
+                        </p>
+
+                        <!-- Grid column -->
+                    </div>
+                    <!-- Grid row -->
+                </div>
+        </section>
+        <!-- Section: Links  -->
+
+        <!-- Copyright -->
+        <div class="text-center py-2">
+            © 2023 Copyright
+        </div>
+        <!-- Copyright -->
+       </div>
+    </div>
+   
+    
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script src="{% static 'js/sidebar.js' %}"></script>
+    <script src="{% static 'js/cfc.js' %}"></script>
+    <script src="{% static 'js/index.js' %}"></script>
+</body>
+
+</html>

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container-fluid ms-5 p-4 rounded post-01" style="background-color: white;width: 85vw;">   
+{% if user.is_authenticated %}
+<div class="container d-flex">
+    <div class="container">
+        <h1>ADD POST</h1>
+        <form method = "POST" enctype="multipart/form-data">
+            {% csrf_token %}
+      {{post_form.as_p}}
+            {% comment %} {{post_form.title}}
+            {{post_form.image}}
+            {{post_form.caption}}
+            {{post_form.org_tag}}
+            {{post_form.event}} {% endcomment %}
+  <button type="submit" class="btn btn-primary" name="add_post">Submit</button>
+</form>
+</div>
+{% endif %}  
+</div>
+{% endblock content %}

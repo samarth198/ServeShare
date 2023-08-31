@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container-fluid d-flex flex-column">
+    
+    <h1>ADD Job</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+    
+    <div class="form-group">
+        {{ job_form.title.label_tag }}
+        {{ job_form.title }}
+    </div>
+    
+    <div class="form-group">
+        {{ job_form.description.label_tag }}
+        {{ job_form.description }}
+    </div>
+    
+    <div class="form-group">
+        {{ job_form.venue.label_tag }}
+        {{ job_form.venue }}
+    </div>
+    
+    <div class="form-group">
+        {{ job_form.compensation.label_tag }}
+        {{ job_form.compensation }}
+    </div>
+    
+    <button type="submit" class="btn btn-primary">Post Job</button>
+</form>
+
+</div>
+{% endblock content %}

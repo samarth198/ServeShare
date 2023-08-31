@@ -1,0 +1,44 @@
+/* for scroll */
+.scrolling {
+    height: 80vh;
+    overflow: auto;
+}
+
+.scrolling::-webkit-scrollbar {
+    width: 0.5em;
+}
+
+.scrolling::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+.scrolling::-webkit-scrollbar-thumb {
+    background-color: transparent;
+}
+
+/* for accordion */
+.accordion-button:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+/* for liking event post */
+.heart-icon, .toggle-comment{
+    cursor: pointer;
+}
+
+@keyframes heartbeat {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+}
+
+.liked {
+    color: #00BBFF !important; /* Change to the desired color for liked posts */
+}

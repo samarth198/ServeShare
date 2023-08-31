@@ -1,0 +1,21 @@
+.post-01{ 
+    height: 85vh;
+    overflow: auto;
+}
+
+.post-01::-webkit-scrollbar {
+    width: 0.5em;
+}
+
+.post-01::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+.post-01::-webkit-scrollbar-thumb {
+    background-color: transparent;
+}
+
+.post-1{
+    margin-top: 0%;
+}
+

@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="card">
+                <div class="card-header">
+                    
+                    <div class="fs-3">
+                        <b>{{ job.title }}</b>
+                    </div>
+                    
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">
+                            <div class="d-flex justify-content-between">
+                                <div>{{ job.posted_by }}</div>
+                                <div>{{ job.created_at }}</div>
+                            </div>
+                        
+                    </h5>
+
+                    <div class="row row-cols-2 " style="margin-left: 12px;">
+                         
+                       
+                        <div class="card-body px-0">
+                            {% if bool %}
+                            YOU HAVE ALREADY APPLIED!!!
+                            {% else %}
+                            <a type="button" class="btn btn-primary m-0" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                Apply
+                            </a>
+                            {% endif %}
+                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                  <div class="modal-content">
+                                    <div class="modal-header">Job Application</h1>
+                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="container">
+                                            <form action="" method="post" >
+                                                {% csrf_token %}
+                                                <div class="mb-3 input-box">
+                                                    <span class="icon"><ion-icon name="mail-outline"></ion-icon></span>
+                                                    {% comment %} <label for="exampleInputEmail1" class="form-label">Email ID</label> {% endcomment %}
+                                                    <input type="email" class="form-control" id="exampleInputEmail1" name="email" aria-describedby="emailHelp">
+                                                    <label for="email">Email ID</label>
+                                                </div>
+                                                <div class="mb-3 input-box">
+                                                    <span class="icon"><ion-icon name="call"></ion-icon>
+                                                    </span>
+                                                    {% comment %} <label for="exampleInputPassword1" class="form-label">Phone Number</label> {% endcomment %}
+                                                    <input type="number" class="form-control" name= "phone" id="exampleInputPassword1">
+                                                    <label for="phone">Phone Number</label>
+                                                </div>
+                                                    <button class="btn btn-primary" type="submit" style="width: 100%;" name="apply" value="{{ job.id }}">Submit</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                  </div>
+                                </div>
+                            </div>
+                        </div> 
+
+                     
+                    </div>
+                    
+                    <div class="row border"></div>
+                    <div class="row border border-light" style="margin-top: 10px;">
+                        <div class="card-body">
+                            
+                            <div class="p-1" style="background-color: white;">
+                                <div class="row">
+                                  <p>{{ job.description }}</p>
+                                </div>
+                                <div class="row">
+                                  <b>Venue: {{ job.venue }}</b>
+                                </div>
+                                <div class="row">
+                                  <b>Stipend: Rs.{{ job.compensation }}</b>
+                                </div>
+                            </div>
+                           
+                           
+                        </div>
+
+
+                        </div>
+                        
+                </div>
+            </div>
+
+
+        </div>
+        
+        </div>
+
+    </div>
+</div>
+
+{% endblock content %}
